@@ -3,7 +3,7 @@ require(tidyverse) # Importando biblitoeca para visualização dos dados
 
 #C1.i)
 
-view(vote1)
+view(vote1) # Visualizar dados do 'vote1'
 
 # Beta1 mostra a variação em pontos percentuais em 'voteA' dado a variação em pontos percentuais em 'expendA', considerando todos os outros valores fixados
 
@@ -18,7 +18,7 @@ summary(regressao_c1_iii)
 
 # voteA = 45,078 + 6,083log(expendA) - 6,615log(expendB) + 0,151prtystrA
 #         (3,926)   (0,382)             (0,378)             (0,062)
-# n = 173    R² = 0,792
+# n = 173    R² = 0,7926
 
 # Tanto 'expendaA' quanto 'expendB' afetam fortemente 'voteA'
 # Para testar a hipóte do item (ii) é preciso do EP(B1 + B2)
@@ -37,3 +37,53 @@ regressao_c1_iv <- lm(voteA ~ log(expendA) + I(log(expendB) - log(expendA)) + pr
 summary(regressao_c1_iv)
 
 # A estatística t encontrada = -0,998 é muito baixa. Portanto não rejeitamos a hipóte de que 'expendA' e 'expendB' se anulam
+
+# ==========================================================================
+
+#C8.i)
+
+view(k401ksubs) # Visualizar dados do '401ksubs'
+
+k401ksubs %>% count(fsize == 1)
+
+# Existem 2017 residências com apenas uma pessoa
+
+#C8.ii)
+
+dados_filtrados <- k401ksubs[which(k401ksubs$fsize == 1),] # filtra dados cuja coluna fsize == 1
+
+regressao_c8_ii <- lm(nettfa ~ inc + age, data = dados_filtrados)
+summary(regressao_c2_ii)
+
+# nettfa = -43,039 + 0,799inc + 0,842age
+#           (4,080)   (0,059)    (0,092)
+# n = 2017  R² = 0,1193
+
+#C8.iii)
+
+# O valor do intercepto é negativo, ou seja, as famílias de uma só pessoa, nascem com ativos financeiros líquidos negativos
+
+#C8.iv)
+
+# H0: B2 = 1
+# H1: B2 < 1
+# alpha = 1%
+
+# Para encontrar o p-valor desse teste precisamos do valor t de B2
+
+t_B2 <- (0.842 - 1)/0.092
+t_B2
+
+p_valor <- 1 - pt(t_B2, df = 2014)
+p_valor
+
+t_B2 *-1 < qnorm(0.02)*-1 # qnorm calulca o valor de t a uma determinada significânica
+
+# Não rejeitamos a hipótese nula, dado que |t_B2| < |t|
+
+#C8.v)
+
+regressao_c8_v <- lm(nettfa ~ inc, data = dados_filtrados)
+summary(regressao_c8_v)
+
+# O coeficiente estimado nas duas regressões são parecidos, dado que a variável explicativa renda anual não possui multicolinearidade com as outras variáveis
