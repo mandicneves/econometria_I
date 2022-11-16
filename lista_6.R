@@ -34,7 +34,7 @@ summary(regressao_c1_iii)
 # voteA = B0 + (θ - B2)*log(expendaA) + B2*log(expendB) + B3*prtystrA
 # Abrindo a expressão
 # voteA = B0 + θ*log(expendA) - B2*log(expendA) + B2*log(expendB) + B3*prtystrA
-# Coloando B2 em evidência
+# Colocando B2 em evidência
 # voteA = B0 + θ*log(expendA) + B2*(log(expendB) - log(expendA)) + B3*prtystrA
 
 regressao_c1_iv <- lm(voteA ~ log(expendA) + I(log(expendB) - log(expendA)) + prtystrA, data = vote1)
@@ -78,12 +78,12 @@ summary(regressao_c2_ii)
 t_B2 <- (0.842 - 1)/0.092
 t_B2
 
-p_valor <- 1 - pt(t_B2, df = 2014)
+p_valor <- pnorm(t_B2)
 p_valor
 
-t_B2 *-1 < qnorm(0.02)*-1 # qnorm calulca o valor de t a uma determinada significânica
+p_valor < 0.05 # pnorm calcula a densidade de probabilidade de um valor 't'
 
-# Não rejeitamos a hipótese nula, dado que |t_B2| < |t|
+# Rejeitamos a hipótese nula, dado que o p_valor encontrado é menor que o nível de significância
 
 #C8.v)
 
