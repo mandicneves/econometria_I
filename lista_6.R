@@ -81,9 +81,9 @@ t_B2
 p_valor <- pnorm(t_B2)
 p_valor
 
-p_valor < 0.05 # pnorm calcula a densidade de probabilidade de um valor 't'
+p_valor < 0.02 # pnorm calcula a densidade de probabilidade de um valor 't'
 
-# Rejeitamos a hipótese nula, dado que o p_valor encontrado é menor que o nível de significância
+# Não rejeitamos a hipótese nula, dado que o p_valor encontrado é maior que o nível de significância
 
 #C8.v)
 
