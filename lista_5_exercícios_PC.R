@@ -5,6 +5,8 @@ require(tidyverse) # Importando biblitoeca para visualização dos dados
 install.packages("wooldridge") # APENAS SE NÃO TIVER INSTALADO
 install.packages("tidyverse") # APENAS SE NÃO TIVER INSTALADO
 
+#===============================================================================
+
 #C5)
 
 view(wage1)
